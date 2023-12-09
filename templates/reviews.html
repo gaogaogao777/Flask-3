@@ -6,23 +6,11 @@
 <html>
 <head>
     <title>Amazon Reviews</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/reviews.js') }}"></script>
-    <style>
-        .review-container {
-            margin-bottom: 40px;
-        }
-
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-    </style>
 </head>
 <body>
     <h1>Amazon Reviews</h1>
