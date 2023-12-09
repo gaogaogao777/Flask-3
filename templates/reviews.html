@@ -1,0 +1,51 @@
+<!-- reviews/templates/reviews/reviews.html -->
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Amazon Reviews</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/reviews.js') }}"></script>
+    <style>
+        .review-container {
+            margin-bottom: 40px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Amazon Reviews</h1>
+    {% for review in reviews %}
+    <div style="display: flex; align-items: center;">
+        <div class="review-container" style="display: flex; align-items: center;">
+            <img src="{{ review.image_path }}" alt="Score Image" style="width: 60px; height: auto; margin-right: 10px;">
+            <div>
+<!--                <p>Score: {{ review.score }}</p>-->
+                <p>Title: {{ review.title }}</p>
+                <p>City: <a href="#" data-toggle="popover" title="City Details" data-content="{{ review.city_details|safe }}">{{ review.city }}</a></p>
+                <p>Review: {{ review.review }}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+<!-- 分页链接 -->
+<div class="pagination" style="display: flex; justify-content: center;">
+    {{ pagination.links }}
+</div>
+</body>
+</html>
+
+
