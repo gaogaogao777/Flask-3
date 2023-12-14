@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Words Finder</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h1>Find Popular Words</h1>
+    <form id="searchForm">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city"><br><br>
+
+        <label for="limit">Limit:</label>
+        <input type="number" id="limit" name="limit"><br><br>
+
+        <input type="submit" value="Search">
+    </form>
+
+    <h2>Results:</h2>
+    <div id="results"></div>
+
+    <script>
+        $(document).ready(function(){
+            $("#searchForm").submit(function(event){
+                event.preventDefault();
+
+                var city = $("#city").val();
+                var limit = $("#limit").val();
+                var queryUrl = '/popular_words?city=' + city + '&limit=' + limit;
+
+                $.get(queryUrl, function(data){
+                    var resultHtml = "<ul>";
+                    $.each(data, function(index, item){
+                        resultHtml += "<li>" + item.term + " (" + item.popularity + ")</li>";
+                    });
+                    resultHtml += "</ul>";
+                    $("#results").html(resultHtml);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>词汇操作页面</title>
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+</head>
+<body>
+    <h1>你的姓名 - 学号后五位</h1>
+    <!-- 如果有照片的话，在这里插入 -->
+{#    <img src="path_to_your_image.jpg" alt="你的照片">#}
+
+    <!-- 热门单词表单 -->
+    <h2>查询热门单词</h2>
+    <form id="popularWordsForm">
+        <label for="city">城市名称：</label>
+        <input type="text" id="city" name="city"><br><br>
+        <label for="limit">单词数量限制：</label>
+        <input type="number" id="limit" name="limit"><br><br>
+        <input type="submit" value="搜索">
+    </form>
+    <div id="popularWordsResults"></div>
+
+    <!-- 单词替换表单 -->
+    <h2>替换单词</h2>
+    <form id="substituteWordsForm">
+        <label for="originalWord">原始单词：</label>
+        <input type="text" id="originalWord" name="word"><br><br>
+        <label for="newWord">新单词：</label>
+        <input type="text" id="newWord" name="substitute"><br><br>
+        <input type="submit" value="替换">
+    </form>
+    <div id="substituteWordsResults"></div>
+
+    <!-- 添加 JavaScript 处理表单提交和 API 交互 -->
+    <script>
+    $(document).ready(function(){
+        // 处理热门单词查询表单提交
+        $("#popularWordsForm").submit(function(event){
+            event.preventDefault();
+            var city = $("#city").val();
+            var limit = $("#limit").val();
+            var queryUrl = '/popular_words?city=' + encodeURIComponent(city) + '&limit=' + limit;
+
+            $.get(queryUrl, function(data){
+                var resultHtml = "<ul>";
+                $.each(data, function(index, item){
+                    resultHtml += "<li>" + item.term + " (热度：" + item.popularity + ")</li>";
+                });
+                resultHtml += "</ul>";
+                $("#popularWordsResults").html(resultHtml);
+            });
+        });
+
+        // 处理单词替换表单提交
+        $("#substituteWordsForm").submit(function(event){
+            event.preventDefault();
+            var originalWord = $("#originalWord").val();
+            var newWord = $("#newWord").val();
+
+            $.ajax({
+                url: '/substitute_words',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ "word": originalWord, "substitute": newWord }),
+                success: function(response) {
+                    $("#substituteWordsResults").html("影响的评论数量: " + response.affected_reviews);
+                }
+            });
+        });
+
+        // 在此处添加其他表单的处理逻辑
+    });
+</script>
+
+</body>
+</html>
