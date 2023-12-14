@@ -15,10 +15,10 @@ your_name = "Your Name"
 student_id_last_5_digits = "12345"
 
 #-------------------------------------------------------------------------------------------------------------
-@app.route('/')
-def index():
-    picture_filename = url_for('static', filename='baidi.jpg')
-    return render_template('index.html', name=your_name, id_last_5_digits=student_id_last_5_digits)
+# @app.route('/')
+# def index():
+#     picture_filename = url_for('static', filename='baidi.jpg')
+#     return render_template('index.html', name=your_name, id_last_5_digits=student_id_last_5_digits)
 
 
 @app.route('/reviews')
@@ -52,7 +52,7 @@ def reviews():
                            per_page=per_page, pagination=pagination)
 
 #-------------------------------------------------------------------------------------------------------------
-@app.route('/words')
+@app.route('/')
 def words():
     return render_template('words.html')
 
