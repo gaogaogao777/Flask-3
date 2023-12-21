@@ -1,46 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Assignment</title>
+    <title>Hello Azure - Python Quickstart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        .reviews table {
+            border-collapse: collapse;
+            width: 100%;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 1em;
+
+        .reviews table, .reviews th, .reviews td {
+            border: 1px solid black;
         }
-        main {
-            padding: 20px;
-            text-align: center;  /* Center-align content within the main section */
-        }
-        img {
-            width: 150px;  /* Set the desired width */
-            height: auto;
-            margin: 0 auto;  /* Center-align the image */
-            display: block;
+
+        .reviews tr {
+            border-bottom: 2px solid black;
         }
     </style>
+    <script>
+
+    </script>
 </head>
-<body>
-    <header>
-        <h1>Zheng Gao</h1>
-        <h2>76604</h2>
-    </header>
+<html>
+   <body>
+        <form action="/data/closest_cities" method="get">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city"><br>
 
-    <main>
-<!--        <h2>Welcome to the Assignment</h2>-->
-        <!-- Your assignment content goes here -->
+            <label for="page">Page:</label>
+            <input type="text" id="page" name="page"><br>
 
-        <!-- Example: Image on the first page -->
-        <img src="{{ url_for('static', filename='baidi.jpg') }}" alt="Your Picture">
-        <p>Go to <a href="/reviews">Amazon reviews</a> on our site.</p>
-    </main>
-</body>
+            <label for="page_size">Page Size:</label>
+            <input type="text" id="page_size" name="page_size"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+        <h1>Cache Purge</h1>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <form method="post" action="{{ url_for('handle_purge_cache') }}">
+            <button type="submit">Purge Cache</button>
+        </form>
+        <form action="/data/knn_reviews" method="get">
+            <label for="classes">classes:</label>
+            <input type="number" id="classes" name="classes"><br>
+
+            <label for="k">k:</label>
+            <input type="number" id="k" name="k"><br>
+
+            <label for="words">words:</label>
+            <input type="number" id="words" name="words"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </body>
 </html>
+
+
