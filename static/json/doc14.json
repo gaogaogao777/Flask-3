@@ -1,0 +1,9 @@
+{
+    "city": "Brookfield",
+    "lat": "43.0640",
+    "lng": "-88.1231",
+    "country": "United States",
+    "state": "Wisconsin",
+    "population": "41020",
+    "_partitionKey":" "
+}

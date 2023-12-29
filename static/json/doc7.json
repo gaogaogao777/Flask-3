@@ -1,0 +1,9 @@
+{
+    "city": "Kenmore",
+    "lat": "42.9646",
+    "lng": "-78.8713",
+    "country": "United States",
+    "state": "New York",
+    "population": "15207",
+    "_partitionKey":" "
+}
